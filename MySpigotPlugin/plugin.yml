@@ -1,0 +1,14 @@
+name: MySpigotPlugin
+main: io.github.erich23.MySpigotPlugin
+version: 1.0
+api-version: 1.16
+commands:
+   trident:
+      description: Give user sick trident
+      usage: /trident
+   spawnmob:
+      description: Spawn mob
+      usage: /spawnmob <mob>
+   pickaxe:
+      description: Give user sick pickaxe
+      usage: /pickaxe

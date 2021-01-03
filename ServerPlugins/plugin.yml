@@ -1,0 +1,8 @@
+name: ServerPlugins
+main: io.github.erich23.serverPlugins.ServerPlugins
+version: 1.0
+api-version: 1.16
+commands:
+   tp:
+      description: Teleport players
+      usage: /tp <teleport to> OR /tp <teleport from> <teleport to>
