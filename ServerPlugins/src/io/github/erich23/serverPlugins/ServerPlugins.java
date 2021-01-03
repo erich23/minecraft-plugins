@@ -89,36 +89,9 @@ public class ServerPlugins extends JavaPlugin implements Listener {
     		}
     		else {
     			//if they're all blocks then
-    			//get priority blocks
-    			Set<Material>nonoLIST = new HashSet<Material>();
-    			nonoLIST.add(Material.CHEST);
-    			nonoLIST.add(Material.ANCIENT_DEBRIS);
-    			nonoLIST.add(Material.DIAMOND_ORE);
-    			nonoLIST.add(Material.DRAGON_EGG);
-    			nonoLIST.add(Material.BEDROCK);
-    			nonoLIST.add(Material.DIAMOND_BLOCK);
-    			nonoLIST.add(Material.EMERALD_BLOCK);
-    			nonoLIST.add(Material.BEACON);
-    			nonoLIST.add(Material.NETHERITE_BLOCK);
-    			nonoLIST.add(Material.END_PORTAL_FRAME);
-    			
-    			if(!nonoLIST.contains(frontType)) {
-    				secondChestLoc = loc.clone().add(1,0,0);
-    			}
-    			else if(!nonoLIST.contains(backType)) {
-    				secondChestLoc = loc.clone().add(-1,0,0);
-    			}
-    			else if(!nonoLIST.contains(leftType)) {
-    				secondChestLoc = loc.clone().add(0,0,-1);
-    			}
-    			else if(!nonoLIST.contains(rightType)){
-    				secondChestLoc = loc.clone().add(0,0,1);
-    			}
-    			else {
-    				//stack chests
-    				secondChestLoc = loc.clone().add(0,1,0);
-    				stacked = true;
-    			}
+    			//stack chests
+    			secondChestLoc = loc.clone().add(0,1,0);
+    			stacked = true;
     			
     		}
     		player.getWorld().getBlockAt(secondChestLoc).setType(Material.CHEST);
