@@ -12,3 +12,9 @@ commands:
    pickaxe:
       description: Give user sick pickaxe
       usage: /pickaxe
+   gm:
+      description: Change gamemode
+      usage: /gm <s|c>
+   tp:
+      description: Teleport players
+      usage: /tp <teleport to> OR /tp <teleport from> <teleport to>

@@ -1,14 +1,18 @@
 package io.github.erich23.serverPlugins;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Server;
+import org.bukkit.World;
 import org.bukkit.block.Chest;
 import org.bukkit.block.data.type.Chest.Type;
 import org.bukkit.command.Command;
@@ -108,20 +112,24 @@ public class ServerPlugins extends JavaPlugin implements Listener {
         
         Integer allItemsI = 0;
         Chest finalchest1 = (Chest) player.getWorld().getBlockAt(loc).getState();
-        Chest finalchest2 = (Chest) player.getWorld().getBlockAt(secondChestLoc).getState();
-
         Integer chestSize = finalchest1.getInventory().getSize();
-
         while(allItemsI < allItems.size() && allItemsI < chestSize) {
         	finalchest1.getInventory().addItem(allItems.get(allItemsI));
         	allItemsI+=1;
         }
-        while(allItemsI < allItems.size()) {
-        	finalchest2.getInventory().addItem(allItems.get(allItemsI));
-        	allItemsI+=1;
+        
+        //populate second chest too
+        if(secondChestLoc != null) {
+        	Chest finalchest2 = (Chest) player.getWorld().getBlockAt(secondChestLoc).getState();
+        	while(allItemsI < allItems.size()) {
+            	finalchest2.getInventory().addItem(allItems.get(allItemsI));
+            	allItemsI+=1;
+            }
         }
         
         e.getDrops().clear();
+        String message = e.getEntity().getName() + " death location at x: " + e.getEntity().getLocation().getX() + "y: " + e.getEntity().getLocation().getY() + "z: "+ e.getEntity().getLocation().getZ() + ".";
+        getLogger().info(message);
     }
     
     @Override
@@ -155,6 +163,29 @@ public class ServerPlugins extends JavaPlugin implements Listener {
         			playerFrom.teleport(playerTo.getLocation());
     				return true;
         		}
+    		}
+    	}
+    	
+    	if (cmd.getName().equalsIgnoreCase("home")) {
+    		if(sender instanceof Player) {
+    			Player sender_ = (Player) sender;
+    			Location loc = new Location(getServer().getWorld("world"), -140, 69, -500);
+    			sender_.teleport(loc);
+    		}
+    	}
+    	
+    	if (cmd.getName().equalsIgnoreCase("gm")) {
+    		if(sender instanceof Player) {
+    			if(args.length > 0 && args[0].equals("c")) {
+    				Player player = (Player) sender;
+        			player.setGameMode(GameMode.CREATIVE);
+        			return true;
+    			}
+    			if(args.length > 0 && args[0].equals("s")) {
+    				Player player = (Player) sender;
+        			player.setGameMode(GameMode.SURVIVAL);
+        			return true;
+    			}
     		}
     	}
     	

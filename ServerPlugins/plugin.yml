@@ -6,3 +6,9 @@ commands:
    tp:
       description: Teleport players
       usage: /tp <teleport to> OR /tp <teleport from> <teleport to>
+   gm:
+      description: Change gamemode
+      usage: /gm <s|c>
+   home:
+      description: teleport to over world home
+      usage: /home

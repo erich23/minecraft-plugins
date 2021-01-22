@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -176,6 +177,53 @@ public class MySpigotPlugin extends JavaPlugin implements Listener {
         			player.getWorld().spawnEntity(location, EntityType.PILLAGER);
         			return true;
     			}
+    		}
+    	}
+    	
+    	if (cmd.getName().equalsIgnoreCase("gm")) {
+    		if(sender instanceof Player) {
+    			if(args.length > 0 && args[0].equals("c")) {
+    				Player player = (Player) sender;
+        			player.setGameMode(GameMode.CREATIVE);
+        			return true;
+    			}
+    			if(args.length > 0 && args[0].equals("s")) {
+    				Player player = (Player) sender;
+        			player.setGameMode(GameMode.SURVIVAL);
+        			return true;
+    			}
+    		}
+    	}
+    	
+    	if (cmd.getName().equalsIgnoreCase("tp")) { // If the player typed /basic then do the following, note: If you only registered this executor for one command, you don't need this
+    		if(sender instanceof Player) {
+    			Player sender_ = (Player) sender;
+    			if(args.length == 2) {
+    				Player playerFrom = Bukkit.getServer().getPlayer(args[0]);
+    				Player playerTo = Bukkit.getServer().getPlayer(args[1]);
+    				if(playerFrom == null) {
+    					sender_.sendMessage("Player: " + args[0] + " not found");
+    					return false;
+    				}
+    				if(playerTo == null) {
+    					sender_.sendMessage("Player: " + args[1] + " not found");
+    					return false;
+    				}
+    				
+    				playerFrom.teleport(playerTo.getLocation());
+    				return true;
+        			
+        		}
+        		if (args.length == 1) {
+        			Player playerFrom = sender_;
+        			Player playerTo = Bukkit.getServer().getPlayer(args[0]);
+        			if(playerTo == null) {
+    					sender_.sendMessage("Player: " + args[0] + " not found");
+    					return false;
+    				}
+        			playerFrom.teleport(playerTo.getLocation());
+    				return true;
+        		}
     		}
     	}
     	//If this has happened the function will return true. 
